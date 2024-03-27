@@ -1,4 +1,4 @@
-from picamera import PiCamera
+from picamera2 import Picamera2
 import errno
 import os
 import sys
@@ -63,12 +63,12 @@ def capture_image():
             thread = threading.Timer(config['interval'], capture_image).start()
 
         # Start up the camera.
-        camera = PiCamera()
+        #camera = Picamera2()
         set_camera_options(camera)
-
+        camera.start()
         # Capture a picture.
-        camera.capture(dir + '/image{0:08d}.jpg'.format(image_number))
-        camera.close()
+        camera.capture_file(dir + '/image{0:08d}.jpg'.format(image_number))
+        camera.stop()
 
         if (image_number < (config['total_images'] - 1)):
             image_number += 1
@@ -95,6 +95,9 @@ create_timestamped_dir(dir)
 
 # Print where the files will be saved
 print("\nFiles will be saved in: " + str(dir_path) + "\n")
+
+#initialize the camera object
+camera = Picamera2()
 
 # Kick off the capture process.
 capture_image()
