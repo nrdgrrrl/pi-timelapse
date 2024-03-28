@@ -39,6 +39,7 @@ This project includes a Systemd unit file that allows the timelapse script to be
 To use this feature, do the following:
 
   1. In your `config.yml`, set the `total_images` variable to a large number—as large as you want, within Python's limitations. This way you won't start a timelapse and it stops after very few images are taken.
+  1. Edit the timelapse.service file and change the username to whatever you'd like it to run as (the default is pi)
   1. Copy the `timelapse.service` file into the Systemd unit file location: `sudo cp timelapse.service /etc/systemd/system/timelapse.service`.
   1. Reload the Systemd daemon (`sudo systemctl daemon-reload`) to load in the new unit file.
   1. Choose how you want to manage the `timelapse` service:
